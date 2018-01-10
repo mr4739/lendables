@@ -9,7 +9,7 @@ function getFormData() {
     });
     var data = {};
     fields.forEach(function (k) {
-        data[k] = elements[k].value;
+        data[k] = elements[k].value.trim().toLowerCase();
     });
     return data;
 }
@@ -22,7 +22,17 @@ function handleFormSubmit(event) {
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
-        // add function to display successful
+        // Clears form input
+        var formElements = document.getElementById("cForm").elements;
+        console.log(formElements);
+        for (el in formElements) {
+            //
+        }
+        // Show successful
+        var notifEl = document.getElementById("notif");
+        notifEl.innerHTML = "Successfully submitted"
+        notifEl.style.display = 'block';
+        
         return;
     };
     // url encode form data for sending as post data
@@ -32,7 +42,11 @@ function handleFormSubmit(event) {
     xhr.send(encoded);
 }
 
+function closeNotif() {
+    document.getElementById("notifClose").style.display = "none";
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
-    var form = document.getElementById('cForm');
-    form.addEventListener("submit", handleFormSubmit, false);
+    document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
+    document.getElementById('notifClose').addEventListener('click', closeNotif);
 }, false);
