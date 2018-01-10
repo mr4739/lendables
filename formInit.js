@@ -62,8 +62,10 @@ function getLog() {
                 for (var j = 0; j < rowData.length; j++) {
                     var temp = document.createElement("div");
                     temp.innerHTML=rowData[j];
+                    temp.className += "rowCell"
                     row.appendChild(temp);
                 }
+                row.className += "row";
                 document.getElementById("infos").appendChild(row);
             }
         }

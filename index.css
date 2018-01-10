@@ -54,7 +54,7 @@
 
     #form-container {
         width: 16em;
-        margin: 6em auto;
+        margin: 6em auto 2em auto;
         background-color: rgba(176, 190, 197, 0.6);
         padding: 2em;
         border-radius: 0.5em;
@@ -82,4 +82,25 @@
     button:hover {
         background-color: rgba(156, 39, 176, 0.8);
         color: white;
+    }
+
+    .rowCell {
+        display: inline-block;
+        padding: 0.5em;
+        font-size: 0.8em;
+        width: calc(25% - 2.4em);
+    }
+
+    .row {
+        width: 70%;
+        margin: auto;
+        background-color: white;
+    }
+
+    #infos {
+        margin-top: 2em;
+    }
+
+    .row:nth-child(even) {
+        background-color: #f2eafb;
     }
