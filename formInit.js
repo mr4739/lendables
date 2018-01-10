@@ -18,13 +18,15 @@ function handleFormSubmit(event) {
     event.preventDefault();
     var data = getFormData(); // get the values submitted in the form
     var url = event.target.action; //
+    console.log(url);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         // Clears form input
         var formElements = document.getElementById("cForm").elements;
-        console.log(formElements);
+        formElements["Item"].value = "";
+        formElements["netID"].value = "";
         for (el in formElements) {
             //
         }
@@ -46,7 +48,19 @@ function closeNotif() {
     document.getElementById("notifClose").style.display = "none";
 }
 
+function getLog() {
+    console.log("hello");
+    var xhr = new XMLHttpRequest();
+    var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.responseText);
+    }
+    xhr.send();
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
     document.getElementById('notifClose').addEventListener('click', closeNotif);
+    document.getElementById('viewLog').addEventListener('click', getLog);
 }, false);
