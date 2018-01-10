@@ -43,10 +43,6 @@ function handleFormSubmit(event) {
     xhr.send(encoded);
 }
 
-function closeNotif() {
-    document.getElementById("notif").style.display = "none";
-}
-
 function getLog() {
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
@@ -77,6 +73,5 @@ function getLog() {
 
 document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
-    document.getElementById('notifClose').addEventListener('click', closeNotif);
     document.getElementById('viewLog').addEventListener('click', getLog);
 }, false);
