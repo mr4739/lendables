@@ -18,7 +18,6 @@ function handleFormSubmit(event) {
     event.preventDefault();
     var data = getFormData(); // get the values submitted in the form
     var url = event.target.action; //
-    console.log(url);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -54,9 +53,19 @@ function getLog() {
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('GET', url);
     xhr.onreadystatechange = function () {
-        console.log(xhr.responseText);
+        var tmp = xhr.responseText;
+        if (tmp){
+            var result = JSON.parse(tmp);
+            var data = JSON.parse(result.data);
+            console.log(data[0][1]);
+
+        }
     }
     xhr.send();
+}
+
+function formatTable(data) {
+    
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
