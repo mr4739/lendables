@@ -44,28 +44,35 @@ function handleFormSubmit(event) {
 }
 
 function closeNotif() {
-    document.getElementById("notifClose").style.display = "none";
+    document.getElementById("notif").style.display = "none";
 }
 
 function getLog() {
-    console.log("hello");
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('GET', url);
     xhr.onreadystatechange = function () {
         var tmp = xhr.responseText;
         if (tmp){
+            var node = document.getElementById("infos");
+            while (node.firstChild) {
+                node.removeChild(node.firstChild);
+            }
             var result = JSON.parse(tmp);
             var data = JSON.parse(result.data);
-            console.log(data[0][1]);
-
+            for (var i = 0; i <  data.length; i++){
+                var rowData = data[i];
+                var row = document.createElement("div");
+                for (var j = 0; j < rowData.length; j++) {
+                    var temp = document.createElement("div");
+                    temp.innerHTML=rowData[j];
+                    row.appendChild(temp);
+                }
+                document.getElementById("infos").appendChild(row);
+            }
         }
     }
     xhr.send();
-}
-
-function formatTable(data) {
-    
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
