@@ -55,13 +55,13 @@ button {
 #form-container {
     width: 16em;
     margin: 4em auto;
-    background-color: rgba(176, 190, 197, 0.6);
+    background-color: #ECEFF1;
     padding: 2em;
     border-radius: 0.5em;
 }
 
 #form-container:hover {
-    background-color: rgba(176, 190, 197, 1);
+    background-color: #CFD8DC;
 }
 
 #options {
@@ -99,9 +99,11 @@ button:hover {
 }
 
 .row {
-    width: 70%;
+    width: 80%;
     margin: auto;
     background-color: white;
+    max-width: 50em;
+    min-width: 24em;
 }
 
 #infos {
@@ -109,7 +111,7 @@ button:hover {
 }
 
 .row:nth-child(even) {
-    background-color: #f2eafb;
+    background-color: #e7daf5;
 }
 
 #menuHead {

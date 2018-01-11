@@ -1,4 +1,6 @@
 var globalTimer;
+var elNetID;
+var elItem;
 
 document.addEventListener('DOMContentLoaded', function (e) {
 
@@ -21,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
         allButts[i].addEventListener("click", hideMenu);
     }
 
+    elNetID = document.getElementById("inputNetID");
+    elItem = document.getElementById("inputItem");
+
     //timer
     globalTimer = setTimeout(hideNotif, 3000);
     clearTimeout(globalTimer);
@@ -38,16 +43,18 @@ function hideNotif() {
 }
 
 function scan() {
-    document.getElementById("inputNetID").style.display = "block";
-    document.getElementById("inputItem").style.display = "block";
+    elNetID.style.display = "block";
+    elItem.style.display = "block";
 }
 
 function returnItem() {
-    document.getElementById("inputNetID").style.display = "none";
-    document.getElementById("inputItem").style.display = "block";
+    elNetID.style.display = "none";
+    elNetID.value = "";
+    elItem.style.display = "block";
 }
 
 function search() {
-    document.getElementById("inputItem").style.display = "none";
-    document.getElementById("inputNetID").style.display = "block";
+    elItem.style.display = "none";
+    elItem.value = "";
+    elNetID.style.display = "block";
 }
