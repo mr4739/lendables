@@ -22,6 +22,8 @@ function handleFormSubmit(event) {
         notifEl.style.backgroundColor = "#f44336";
         notifEl.innerHTML = "Error, invalid fields"
         notifEl.style.display = 'block';
+        clearTimeout(globalTimer);
+        globalTimer = setTimeout(hideNotif, 3000);
         return;
     }
     var intentString;
@@ -49,6 +51,9 @@ function handleFormSubmit(event) {
             notifEl.style.backgroundColor = "#4CAF50";
             notifEl.innerHTML = "Successfully submitted"
             notifEl.style.display = 'block';
+
+            clearTimeout(globalTimer);
+            globalTimer = setTimeout(hideNotif, 3000);
             return;
         }
     };
