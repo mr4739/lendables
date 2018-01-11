@@ -73,6 +73,11 @@ function getLog() {
     xhr.send();
 }
 
+function scan() {
+    document.getElementById("inputNetID").style.display = "block";
+    document.getElementById("inputItem").style.display = "block";
+}
+
 function returnItem() {
     document.getElementById("inputNetID").style.display = "none";
     document.getElementById("inputItem").style.display = "block";
@@ -85,6 +90,7 @@ function search() {
 
 document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
+    document.getElementById('scan').addEventListener('click', scan);
     document.getElementById('viewLog').addEventListener('click', getLog);
     document.getElementById('searchId').addEventListener('click', search);
     document.getElementById('returnItem').addEventListener('click', returnItem);
