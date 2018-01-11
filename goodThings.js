@@ -12,12 +12,27 @@ document.addEventListener('DOMContentLoaded', function (e) {
     inNetID.pattern = "[a-zA-Z0-9]+";
 
     var inItem = document.getElementById("inputItem");
+    document.getElementById("options").className = "menu-off";
+    document.getElementById("menuClose").addEventListener("click", hideMenu, false);
+
+    document.getElementById("menuIcon").addEventListener("click", showMenu, false);
+    var allButts = document.getElementsByClassName("opt");
+    for (var i = 0; i < allButts.length; i++) {
+        allButts[i].addEventListener("click", hideMenu);
+    }
 
     //timer
     globalTimer = setTimeout(hideNotif, 3000);
     clearTimeout(globalTimer);
 });
 
+function showMenu() {
+    document.getElementById("options").className = "menu-on";
+}
+
+function hideMenu() {
+    document.getElementById("options").className = "menu-off";
+}
 function hideNotif() {
     document.getElementById("notif").style.display = "none";
 }
