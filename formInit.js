@@ -17,14 +17,14 @@ function getFormData() {
 function handleFormSubmit(event) {
     event.preventDefault();
     var formElements = document.getElementById("cForm").elements;
+    var notifEl = document.getElementById("notif");
     if (formElements["netID"].value == "" && formElements["Item"].value == "") {
-        notifEl.style.backgroundColor = "";
+        notifEl.style.backgroundColor = "#f44336";
         notifEl.innerHTML = "Error, invalid fields"
         notifEl.style.display = 'block';
         return;
     }
     var intentString;
-    var notifEl = document.getElementById("notif");
     var data = getFormData(); // get the values submitted in the form
     var url = event.target.action; //
     var xhr = new XMLHttpRequest();
