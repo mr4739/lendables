@@ -20,27 +20,37 @@ function handleFormSubmit(event) {
     var url = event.target.action; //
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
+    var intentString;
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4){
         // Clears form input
-        var formElements = document.getElementById("cForm").elements;
-        formElements["Item"].value = "";
-        formElements["netID"].value = "";
-        for (el in formElements) {
-            //
-        }
-        // Show successful
-        var notifEl = document.getElementById("notif");
-        notifEl.innerHTML = "Successfully submitted"
-        notifEl.style.display = 'block';
+            var formElements = document.getElementById("cForm").elements;
         
-        return;
+            if(formElements["netID"].value == "") {
+                console.log("no netId");
+                intentString = "search";
+            } else if (formElements["Item"].value == "") {
+                console.log("no item");
+                intentString = "return";
+            } else {
+                intentString = "lending";
+            }
+            formElements["Item"].value = "";
+            formElements["netID"].value = "";
+            // Show successful
+            var notifEl = document.getElementById("notif");
+            notifEl.innerHTML = "Successfully submitted"
+            notifEl.style.display = 'block';
+
+            return;
+        }
     };
     // url encode form data for sending as post data
     var encoded = Object.keys(data).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
     }).join('&')
-    xhr.send(encoded);
+    xhr.send(encoded + "&intent=" + intentString);
 }
 
 function getLog() {
