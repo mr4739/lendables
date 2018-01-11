@@ -26,6 +26,14 @@ function handleFormSubmit(event) {
         globalTimer = setTimeout(hideNotif, 3000);
         return;
     }
+    if (formElements["netID"].value == "") {
+                intentString = "return";
+    } else if (formElements["Item"].value == "") {
+                intentString = "search";
+            } else {
+                intentString = "lending";
+            }
+
     var intentString;
     var data = getFormData(); // get the values submitted in the form
     var url = event.target.action; //
@@ -34,16 +42,8 @@ function handleFormSubmit(event) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
-            if (formElements["netID"].value == "#f44336") {
-                // console.log("no netId");
-                intentString = "search";
-            } else if (formElements["Item"].value == "") {
-                // console.log("no item");
-                intentString = "return";
-            } else {
-                intentString = "lending";
-            }
-
+            console.log(xhr.responseText);
+            
             // Clears form input
             formElements["Item"].value = "";
             formElements["netID"].value = "";
@@ -59,12 +59,20 @@ function handleFormSubmit(event) {
     };
     // url encode form data for sending as post data
     var encoded = Object.keys(data).map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+        if (data[k]) {
+            return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+        }
     }).join('&')
-    xhr.send(encoded + "&intent=" + intentString);
+    //console.log(encoded + "&intent=" + intentString);
+    if (intentString == "lending") {
+        xhr.send(encoded + "&intent=" + intentString + "&Returned=false");
+    } else {
+        xhr.send(encoded + "&intent=" + intentString);
+    }
 }
 
 function getLog() {
+    console.log("i'm trying");
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('GET', url);
@@ -96,4 +104,5 @@ function getLog() {
 
 document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
+    document.getElementById('viewLog').addEventListener("click", getLog);
 }, false);
