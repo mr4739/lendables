@@ -16,33 +16,39 @@ function getFormData() {
 
 function handleFormSubmit(event) {
     event.preventDefault();
+    var formElements = document.getElementById("cForm").elements;
+    if (formElements["netID"].value == "" && formElements["Item"].value == "") {
+        notifEl.style.backgroundColor = "";
+        notifEl.innerHTML = "Error, invalid fields"
+        notifEl.style.display = 'block';
+        return;
+    }
+    var intentString;
+    var notifEl = document.getElementById("notif");
     var data = getFormData(); // get the values submitted in the form
     var url = event.target.action; //
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
-    var intentString;
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4){
-        // Clears form input
-            var formElements = document.getElementById("cForm").elements;
-        
-            if(formElements["netID"].value == "") {
-                console.log("no netId");
+        if (xhr.readyState == 4) {
+            if (formElements["netID"].value == "#f44336") {
+                // console.log("no netId");
                 intentString = "search";
             } else if (formElements["Item"].value == "") {
-                console.log("no item");
+                // console.log("no item");
                 intentString = "return";
             } else {
                 intentString = "lending";
             }
+
+            // Clears form input
             formElements["Item"].value = "";
             formElements["netID"].value = "";
             // Show successful
-            var notifEl = document.getElementById("notif");
+            notifEl.style.backgroundColor = "#4CAF50";
             notifEl.innerHTML = "Successfully submitted"
             notifEl.style.display = 'block';
-
             return;
         }
     };
@@ -59,19 +65,19 @@ function getLog() {
     xhr.open('GET', url);
     xhr.onreadystatechange = function () {
         var tmp = xhr.responseText;
-        if (tmp){
+        if (tmp) {
             var node = document.getElementById("infos");
             while (node.firstChild) {
                 node.removeChild(node.firstChild);
             }
             var result = JSON.parse(tmp);
             var data = JSON.parse(result.data);
-            for (var i = 0; i <  data.length; i++){
+            for (var i = 0; i < data.length; i++) {
                 var rowData = data[i];
                 var row = document.createElement("div");
                 for (var j = 0; j < rowData.length; j++) {
                     var temp = document.createElement("div");
-                    temp.innerHTML=rowData[j];
+                    temp.innerHTML = rowData[j];
                     temp.className += "rowCell"
                     row.appendChild(temp);
                 }
