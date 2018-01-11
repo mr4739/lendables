@@ -18,8 +18,8 @@
     </div>
     <div id="form-container">
         <form id="cForm" method="POST" action="https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec">
-            <input type="text" name="netID" placeholder="NetID">
-            <input type="text" name="Item" placeholder="QR Scan">
+            <input type="text" name="netID" placeholder="NetID" id="inputNetID">
+            <input type="text" name="Item" placeholder="QR Scan" id="inputItem">
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -35,6 +35,12 @@
         </button>
         <button class="opt">
             Manage Lendables
+        </button>
+        <button class = "opt" id = "searchId">
+            Search
+        </button>
+        <button class = "opt" id = "returnItem">
+            Return an Item
         </button>
     </div>
     <div id="infos">
