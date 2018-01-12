@@ -55,7 +55,6 @@ function handleFormSubmit(event) {
 
             if (intentString == "search") {
                 var tmp = xhr.responseText;
-                console.log(tmp);
                 if (tmp) {
                     clearBody();
                     var result = JSON.parse(tmp);
@@ -98,6 +97,36 @@ function handleFormSubmit(event) {
     } else {
         xhr.send(encoded + "&intent=" + intentString);
     }
+}
+
+function currentItems() {
+    var xhr = new XMLHttpRequest();
+    var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+        var tmp = xhr.responseText;
+        if (tmp) {
+            clearBody();
+            var result = JSON.parse(tmp);
+            var data = JSON.parse(result.data);
+            for (var i = 0; i < data.length; i++) {
+                var rowData = data[data.length - i - 1];
+                if (rowData[rowData.length - 1] == "FALSE") {
+                    var row = document.createElement("div");
+                    for (var j = 0; j < data[i].length; j++) {
+                        var temp = document.createElement("div");
+                        temp.innerHTML = rowData[j];
+                        temp.className += "rowCell"
+                        row.appendChild(temp);
+                    }
+                    row.className += "row";
+                    document.getElementById("infos").appendChild(row);
+                }
+            }
+        }
+        return;
+    }
+    xhr.send();
 }
 
 function getLog() {

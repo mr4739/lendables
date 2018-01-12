@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('scan').addEventListener('click', scan);
     document.getElementById('searchId').addEventListener('click', search);
     document.getElementById('returnItem').addEventListener('click', returnItem);
+    document.getElementById('currItem').addEventListener('click', currentItems);
 
     //form validation
     var inNetID = document.getElementById("inputNetID");
