@@ -4,11 +4,6 @@ var elItem;
 
 document.addEventListener('DOMContentLoaded', function (e) {
 
-    document.getElementById('scan').addEventListener('click', scan);
-    document.getElementById('searchId').addEventListener('click', search);
-    document.getElementById('returnItem').addEventListener('click', returnItem);
-    document.getElementById('currItem').addEventListener('click', currentItems);
-
     //form validation
     var inNetID = document.getElementById("inputNetID");
     inNetID.maxLength = 6;
@@ -30,6 +25,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
     //timer
     globalTimer = setTimeout(hideNotif, 3000);
     clearTimeout(globalTimer);
+
+    document.getElementById('scan').addEventListener('click', scan);
+    document.getElementById('searchId').addEventListener('click', search);
+    document.getElementById('returnItem').addEventListener('click', returnItem);
+    document.getElementById('currItem').addEventListener('click', currentItems);
+    document.getElementById('aboutInfo').addEventListener('click', showAbout);
+
 });
 
 function showMenu() {
@@ -66,6 +68,17 @@ function clearBody() {
     while (node.firstChild) {
         node.removeChild(node.firstChild);
     }
+}
+
+function showAbout() {
+    var aboutEl = document.createElement("div");
+    aboutEl.innerHTML = "NYU LaGuardia Co-op<br>Lendables Manager<br>version 0.1.0<br>https://github.com/stcnyu/";
+    aboutEl.style.textAlign = "left";
+    aboutEl.style.lineHeight = 1.5;
+    aboutEl.style.width = "24em";
+    aboutEl.style.margin = "auto";
+    aboutEl.style.fontSize = "0.8em";
+    document.getElementById("infos").appendChild(aboutEl);
 }
 
 function formatAMPM(date) {

@@ -58,6 +58,7 @@ button {
     background: white;
     transition: 0.5s all;
     height: 100%;
+    box-shadow: 0 0px 12px 0 #ECEFF1, 0 0px 24px 0 #CFD8DC;
 }
 
 .opt {
