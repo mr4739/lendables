@@ -37,6 +37,7 @@ function showMenu() {
 
 function hideMenu() {
     document.getElementById("options").className = "menu-off";
+    clearBody();
 }
 function hideNotif() {
     document.getElementById("notif").style.display = "none";
@@ -57,4 +58,22 @@ function search() {
     elItem.style.display = "none";
     elItem.value = "";
     elNetID.style.display = "block";
+}
+
+function clearBody() {
+    var node = document.getElementById("infos");
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
+}
+
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
 }

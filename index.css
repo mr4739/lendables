@@ -6,27 +6,10 @@ body {
 body * {
     font-family: 'Roboto', sans-serif;
 }
-#notifClose {
-    position: absolute;
-    top: 0.5em;
-    right: 0.5em;
-    background-color: white;
-    color: black;
-    padding: 0.5em;
-    width: 0.5em;
-    height: 0.5em;
-    line-height: 0.5;
-    border-radius: 1em;
-    user-select: none;
-    cursor: pointer;
-}
-
-input {
-    display: block;
-}
 
 input,
 button {
+    display: block;
     margin: 0.4em;
     padding: 1em;
     width: calc(100% - 3.2em);
@@ -68,10 +51,10 @@ button {
     padding: 2em;
     position: fixed;
     top: 0;
-    /* display: none; */
     width: calc(100% - 4em);
-    overflow-x: auto;
-    /* margin: 0; */
+    max-width: 26em;
+    max-height: calc(100vh - 4em);
+    overflow: auto;
     background: white;
     transition: 0.5s all;
     height: 100%;
@@ -79,10 +62,7 @@ button {
 
 .opt {
     margin: 0.5em;
-    /* padding: 1em; */
-    /* background-color: white; */
     display: inline-block;
-    /* width: 100%; */
     text-align: left;
 }
 
@@ -123,14 +103,14 @@ button:hover {
     float: right;
     cursor: pointer;
 }
-#menuClose:hover {
+#menuClose:hover, #menuIcon:hover {
     color: rgba(156, 39, 176, 0.8);
 }
 .menu-on {
-    left: 0;
+    right: 0;
 }
 .menu-off {
-    left: 100%;
+    right: -100%;
 }
 #menuIcon {
     font-size: 1.5em;

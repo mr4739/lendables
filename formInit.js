@@ -27,12 +27,12 @@ function handleFormSubmit(event) {
         return;
     }
     if (formElements["netID"].value == "") {
-                intentString = "return";
+        intentString = "return";
     } else if (formElements["Item"].value == "") {
-                intentString = "search";
-            } else {
-                intentString = "lending";
-            }
+        intentString = "search";
+    } else {
+        intentString = "lending";
+    }
 
     var intentString;
     var data = getFormData(); // get the values submitted in the form
@@ -42,8 +42,6 @@ function handleFormSubmit(event) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
-            console.log(xhr.responseText);
-            
             // Clears form input
             formElements["Item"].value = "";
             formElements["netID"].value = "";
@@ -54,6 +52,37 @@ function handleFormSubmit(event) {
 
             clearTimeout(globalTimer);
             globalTimer = setTimeout(hideNotif, 3000);
+
+            if (intentString == "search") {
+                var tmp = xhr.responseText;
+                console.log(tmp);
+                if (tmp) {
+                    clearBody();
+                    var result = JSON.parse(tmp);
+                    var data = JSON.parse(result.data);
+                    for (var i = 0; i < data.length; i++) {
+                        var rowData = data[i];
+                        var row = document.createElement("div");
+                        for (var j = 0; j < data[i].length; j++) {
+                            var temp = document.createElement("div");
+                            //bad practice but date is first element in array
+                            if (j == 0) {
+                                var d = new Date(Date.parse(rowData[j]));
+                                rowData[j] = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+                            }
+                            //time is second element in array
+                            else if (j == 1) {
+                                rowData[j] = formatAMPM(new Date(Date.parse(rowData[j])));
+                            }
+                            temp.innerHTML = rowData[j];
+                            temp.className += "rowCell"
+                            row.appendChild(temp);
+                        }
+                        row.className += "row";
+                        document.getElementById("infos").appendChild(row);
+                    }
+                }
+            }
             return;
         }
     };
@@ -72,23 +101,20 @@ function handleFormSubmit(event) {
 }
 
 function getLog() {
-    console.log("i'm trying");
+    console.log("getting recent log");
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('GET', url);
     xhr.onreadystatechange = function () {
         var tmp = xhr.responseText;
         if (tmp) {
-            var node = document.getElementById("infos");
-            while (node.firstChild) {
-                node.removeChild(node.firstChild);
-            }
+            clearBody();
             var result = JSON.parse(tmp);
             var data = JSON.parse(result.data);
-            for (var i = 0; i < data.length; i++) {
-                var rowData = data[i];
+            for (var i = 0; i < data.length && i < 8; i++) {
+                var rowData = data[data.length - i - 1];
                 var row = document.createElement("div");
-                for (var j = 0; j < rowData.length; j++) {
+                for (var j = 0; j < data[i].length; j++) {
                     var temp = document.createElement("div");
                     temp.innerHTML = rowData[j];
                     temp.className += "rowCell"
@@ -98,6 +124,7 @@ function getLog() {
                 document.getElementById("infos").appendChild(row);
             }
         }
+        return;
     }
     xhr.send();
 }
