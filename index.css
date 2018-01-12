@@ -54,7 +54,7 @@ button {
 
 #form-container {
     width: 16em;
-    margin: 4em auto;
+    margin: 2em auto;
     background-color: #ECEFF1;
     padding: 2em;
     border-radius: 0.5em;
@@ -107,7 +107,9 @@ button:hover {
 }
 
 #infos {
-    margin-top: 2em;
+    margin: 2em 0;
+    max-height: 20em;
+    overflow: auto;
 }
 
 .row:nth-child(even) {
