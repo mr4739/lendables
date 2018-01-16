@@ -53,7 +53,7 @@ function handleFormSubmit(event) {
             clearTimeout(globalTimer);
             globalTimer = setTimeout(hideNotif, 3000);
 
-            if (intentString == "search") {
+            if (intentString == "search" || intentString == "return") {
                 var tmp = xhr.responseText;
                 if (tmp) {
                     clearBody();
