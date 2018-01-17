@@ -51,6 +51,9 @@
                     document.cookie = "token=" + gConst;
                     location.reload();
                 }
+                else {
+                    document.getElementById("nopes").style.display = "block";
+                }
             }
             catch (e) {
                 document.getElementById("nopes").style.display = "block";
