@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width" />
     <title>LaGuardia Co-op Lendables</title>
     <script src="sha256.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js?ver=1.11.1"></script>
+    <script src="formInit.js"></script>
+    <script src="goodThings.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <div id="nopes">
+        <p>You are seeing this because of one or more of the following reasons: </p>
+        <ul>
+            <li>you entered an incorrect password</li>
+            <li>you are logged out</li>
+            <li>you browser session expired</li>
+        </ul>
+    </div>
     <script>
         function getCookiePart(cookiename) {
             // Get name followed by anything except a semicolon
@@ -31,15 +47,8 @@
                 location.reload();
             }
         }
+        document.getElementById("nopes").style.display = "none";
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js?ver=1.11.1"></script>
-    <script src="formInit.js"></script>
-    <script src="goodThings.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="index.css">
-</head>
-
-<body>
     <div id="menuIcon">&#9776;</div>
     <div id="notif">
         <div id="notifBody">Notification placeholder</div>
