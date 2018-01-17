@@ -158,6 +158,7 @@ function getLog() {
     xhr.send();
 }
 
+/*
 function getArchive() {
     console.log("getting archive");
     var xhr = new XMLHttpRequest();
@@ -185,6 +186,23 @@ function getArchive() {
         return;
     }
     xhr.send();
+}
+*/
+
+function getArchive() {
+    var intentString;
+    var xhr = new XMLHttpRequest();
+    var notifEl = document.getElementById("notif");
+    notifEl.style.backgroundColor = "#4CAF50";
+    notifEl.innerHTML = "Successfully submitted"
+    notifEl.style.display = 'block';
+    clearTimeout(globalTimer);
+    globalTimer = setTimeout(hideNotif, 3000);
+    var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    console.log("intent=archive");
+    xhr.send("intent=archive");
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
