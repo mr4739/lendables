@@ -22,8 +22,8 @@
             <li>your browser session expired</li>
             <li>your browser does not support cookies</li>
         </ul>
-        <p>Please ensure cookies are enabled through your browser settings or try a different browser.
-            Then, refresh the page to enter the password.</p>
+        <p>Please ensure cookies are enabled through your browser settings or try a different browser. Then, refresh the page
+            to enter the password.</p>
     </div>
     <script>
         function getCookiePart(cookiename) {
@@ -41,14 +41,17 @@
                 var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
             }
+            document.body.style.display = "none";
             location.reload();
         }
         if (getCookiePart("token") != gConst) {
             window.stop();
-            document.getElementById("nopes").style.display = "block";
             if (hex_sha256(window.prompt("Password")) == gConst) {
                 document.cookie = "token=" + gConst;
                 location.reload();
+            }
+            else {
+                document.getElementById("nopes").style.display = "block";
             }
         }
     </script>
