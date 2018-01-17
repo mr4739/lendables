@@ -31,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('returnItem').addEventListener('click', returnItem);
     document.getElementById('currItem').addEventListener('click', currentItems);
     document.getElementById('aboutInfo').addEventListener('click', showAbout);
-
-    document.getElementById("nopes").style.display = "none";
 });
 
 function showMenu() {
