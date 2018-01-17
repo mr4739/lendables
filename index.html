@@ -15,15 +15,15 @@
 
 <body>
     <div id="nopes" style="display: none">
-        <p>You are seeing this because of one or more of the following reasons: </p>
+        <p> You are seeing this because of one or more of the following reasons: </p>
         <ul>
-            <li>you are logged out</li>
-            <li>you entered an incorrect password</li>
-            <li>your browser session expired</li>
-            <li>your browser does not support cookies</li>
+            <li> you are logged out</li>
+            <li> you entered an incorrect password</li>
+            <li> your browser session expired</li>
+            <li> your browser does not support cookies</li>
         </ul>
-        <p>Please ensure cookies are enabled through your browser settings or try a different browser. Then, refresh the page
-            to enter the password.</p>
+        <p> Please ensure cookies are enabled through your browser settings or try a different browser.
+            <br> Then, refresh the page to enter the password.</p>
     </div>
     <script>
         function getCookiePart(cookiename) {
@@ -46,11 +46,13 @@
         }
         if (getCookiePart("token") != gConst) {
             window.stop();
-            if (hex_sha256(window.prompt("Password")) == gConst) {
-                document.cookie = "token=" + gConst;
-                location.reload();
+            try {
+                if (hex_sha256(window.prompt("Password")) == gConst) {
+                    document.cookie = "token=" + gConst;
+                    location.reload();
+                }
             }
-            else {
+            catch (e) {
                 document.getElementById("nopes").style.display = "block";
             }
         }
