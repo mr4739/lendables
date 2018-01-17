@@ -71,7 +71,7 @@ function clearBody() {
 
 function showAbout() {
     var aboutEl = document.createElement("div");
-    aboutEl.innerHTML = "NYU LaGuardia Co-op<br>Lendables Manager<br>version 0.1.0<br>https://github.com/stcnyu/";
+    aboutEl.innerHTML = "NYU LaGuardia Co-op<br>Lendables Manager<br>version 1.0.0<br>https://github.com/stcnyu/";
     aboutEl.style.textAlign = "left";
     aboutEl.style.lineHeight = 1.5;
     aboutEl.style.width = "24em";
