@@ -1,4 +1,9 @@
+document.addEventListener("DOMContentLoaded", function (e) {
+  
+});
+
 function checkInAlum () {
+
   return;
 }
 
