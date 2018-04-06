@@ -1,5 +1,5 @@
-function getFormData() {
-    var elements = document.getElementById("cForm").elements; // all form elements
+function getFormData(which = "cForm") {
+    var elements = document.getElementById(which).elements; // all form elements
     var fields = Object.keys(elements).map(function (k) {
         if (elements[k].name !== undefined) {
             return elements[k].name;
@@ -176,17 +176,12 @@ function getArchive() {
 
 function handleAlumForm(e) {
     event.preventDefault();
-    var data = getFormData();
+    var data = getFormData("aForm");
     var url = event.target.action;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
-        document.body.classList.remove("contactActive");
-        document.getElementById('divForm').style.display = 'none';
-        document.getElementById('divFormSent').style.display = 'block';
-        document.getElementById('question').style.display = 'none';
-        document.getElementById('check').style.display = 'block';
         return;
     };
     var encoded = Object.keys(data).map(function (k) {
