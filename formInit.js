@@ -170,7 +170,6 @@ function getArchive() {
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    console.log("intent=archive");
     xhr.send("intent=archive");
 }
 
@@ -187,7 +186,18 @@ function handleAlumForm(e) {
     var encoded = Object.keys(data).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
     }).join('&')
-    xhr.send(encoded);
+
+    var aName = document.getElementById("inputAlumName").value;
+    var aNetID = document.getElementById("inputAlumNetID").value;
+    var aBarcode = document.getElementById("inputAlumBarcode").value;
+    
+    if (aName != "" && aNetID != "") {
+        xhr.send(encoded + "genAlumCode");
+    }
+    else if (aName != "" && aNetID != "") {
+        xhr.send(encoded + "getAlumInfo");
+    }
+    xhr.send(encoded + "checkInAlum");
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
