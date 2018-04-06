@@ -174,8 +174,30 @@ function getArchive() {
     xhr.send("intent=archive");
 }
 
+function handleAlumForm(e) {
+    event.preventDefault();
+    var data = getFormData();
+    var url = event.target.action;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        document.body.classList.remove("contactActive");
+        document.getElementById('divForm').style.display = 'none';
+        document.getElementById('divFormSent').style.display = 'block';
+        document.getElementById('question').style.display = 'none';
+        document.getElementById('check').style.display = 'block';
+        return;
+    };
+    var encoded = Object.keys(data).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+    }).join('&')
+    xhr.send(encoded);
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
     document.getElementById('viewLog').addEventListener("click", getLog);
     document.getElementById('archive').addEventListener("click", getArchive);
+    document.getElementById('aForm').addEventListener("submit", handleAlumForm, false);
 }, false);
