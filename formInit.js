@@ -64,12 +64,10 @@ function handleFormSubmit(event) {
                         var row = document.createElement("div");
                         for (var j = 0; j < data[i].length; j++) {
                             var temp = document.createElement("div");
-                            //bad practice but date is first element in array
                             if (j == 0) {
                                 var d = new Date(Date.parse(rowData[j]));
                                 rowData[j] = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
                             }
-                            //time is second element in array
                             else if (j == 1) {
                                 rowData[j] = formatAMPM(new Date(Date.parse(rowData[j])));
                             }
@@ -91,7 +89,6 @@ function handleFormSubmit(event) {
             return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
         }
     }).join('&')
-    //console.log(encoded + "&intent=" + intentString);
     if (intentString == "lending") {
         xhr.send(encoded + "&intent=" + intentString + "&Returned=false");
     } else {
@@ -130,7 +127,6 @@ function currentItems() {
 }
 
 function getLog() {
-    console.log("getting recent log");
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('GET', url);
@@ -181,7 +177,12 @@ function handleAlumForm(e) {
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
-        return;
+        var tmp = xhr.responseText;
+        if (tmp) {
+            clearBody();
+            document.getElementById("infos").textContent = tmp;
+            return;
+        }
     };
     var encoded = Object.keys(data).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
@@ -190,14 +191,14 @@ function handleAlumForm(e) {
     var aName = document.getElementById("inputAlumName").value;
     var aNetID = document.getElementById("inputAlumNetID").value;
     var aBarcode = document.getElementById("inputAlumBarcode").value;
-    
+
     if (aName != "" && aNetID != "") {
-        xhr.send(encoded + "genAlumCode");
+        xhr.send(encoded + "&intent=" + "genAlumCode");
     }
     else if (aName != "" && aNetID != "") {
-        xhr.send(encoded + "getAlumInfo");
+        xhr.send(encoded + "&intent=" + "getAlumInfo");
     }
-    xhr.send(encoded + "checkInAlum");
+    xhr.send(encoded + "&intent=" + "checkInAlum");
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {

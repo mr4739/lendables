@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function (e) {
-  
+
 });
 
-function checkInAlum () {
+function checkInAlum() {
 
-  return;
+    return;
 }
 
 function generateAlumCode() {
-  return;
+    return;
 }
 
-function getAlumInfo () {
-  return;
+function getAlumInfo() {
+    return;
 }

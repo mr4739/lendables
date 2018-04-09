@@ -66,16 +66,19 @@
     </div>
     <img src="lenda.png" style="margin-top: 4em;">
     <div id="form-container">
+        <p>Lendables</p>
         <form id="cForm" method="POST" action="https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec">
             <input type="text" name="netID" placeholder="NetID" id="inputNetID">
             <input type="text" name="Item" placeholder="Barcode Scan" id="inputItem">
             <button type="submit">Submit</button>
         </form>
-
-        <form style="display:none" id="aForm" method="POST" action="https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec">
+        <p>Alumni</p>
+        <form id="aForm" method="POST" action="https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec">
+            <p>Generate a barcode for alumni</p>
             <input type="text" name="Name" placeholder="Full name" id="inputAlumName">
             <input type="text" name="NetID" placeholder="NetID" id="inputAlumNetID">
-            <input type="text" name="barcode" placeholder="Barcode" id="inputAlumBarcode">
+            <p>View alumni information</p>
+            <input type="text" name="Barcode" placeholder="Barcode" id="inputAlumBarcode">
             <button type="submit">Submit</button>
         </form>
 
@@ -107,16 +110,6 @@
         -->
         <button class="opt" id="archive">
             Archive All Log
-        </button>
-
-        <button class="opt" id="genAlumCode">
-            New Alumni Barcode
-        </button>
-        <button class="opt" id="checkInAlum">
-            Check in Alumni
-        </button>
-        <button class="opt" id="getAlumInfo">
-            View Alumni Info
         </button>
 
         <button class="opt" id="aboutInfo">
