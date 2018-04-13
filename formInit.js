@@ -204,6 +204,10 @@ function handleAlumForm(e) {
     else {
         xhr.send(encoded + "&intent=" + "getAlumInfo");
     }
+    aName.value = "";
+    aNetID.value = "";
+    aBarcode.value = "";
+    bBarcode.value = "";
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
