@@ -179,8 +179,9 @@ function handleAlumForm(e) {
     xhr.onreadystatechange = function () {
         var tmp = xhr.responseText;
         if (tmp) {
+            tmp = JSON.parse(tmp);
             clearBody();
-            document.getElementById("infos").textContent = tmp;
+            document.getElementById("infos").textContent = tmp.data;
             return;
         }
     };
@@ -190,15 +191,19 @@ function handleAlumForm(e) {
 
     var aName = document.getElementById("inputAlumName").value;
     var aNetID = document.getElementById("inputAlumNetID").value;
-    var aBarcode = document.getElementById("inputAlumBarcode").value;
+    var aBarcode = document.getElementById("infoAlum").value;
+    var bBarcode = document.getElementById("checkAlum").value;
+
 
     if (aName != "" && aNetID != "") {
         xhr.send(encoded + "&intent=" + "genAlumCode");
     }
-    else if (aName != "" && aNetID != "") {
+    else if (aBarcode != "") {
         xhr.send(encoded + "&intent=" + "getAlumInfo");
     }
-    xhr.send(encoded + "&intent=" + "checkInAlum");
+    else {
+        xhr.send(encoded + "&intent=" + "checkInAlum");
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
