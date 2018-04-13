@@ -191,18 +191,18 @@ function handleAlumForm(e) {
 
     var aName = document.getElementById("inputAlumName").value;
     var aNetID = document.getElementById("inputAlumNetID").value;
-    var aBarcode = document.getElementById("infoAlum").value;
-    var bBarcode = document.getElementById("checkAlum").value;
+    var aBarcode = document.getElementById("checkAlum").value;
+    var bBarcode = document.getElementById("infoAlum").value;
 
 
     if (aName != "" && aNetID != "") {
         xhr.send(encoded + "&intent=" + "genAlumCode");
     }
     else if (aBarcode != "") {
-        xhr.send(encoded + "&intent=" + "getAlumInfo");
+        xhr.send(encoded + "&intent=" + "checkInAlum");
     }
     else {
-        xhr.send(encoded + "&intent=" + "checkInAlum");
+        xhr.send(encoded + "&intent=" + "getAlumInfo");
     }
 }
 
