@@ -182,6 +182,7 @@ function handleAlumForm(e) {
             tmp = JSON.parse(tmp);
             clearBody();
             document.getElementById("infos").textContent = tmp.data;
+            clearAlumForm();
             return;
         }
     };
@@ -204,6 +205,9 @@ function handleAlumForm(e) {
     else {
         xhr.send(encoded + "&intent=" + "getAlumInfo");
     }
+}
+
+function clearAlumForm() {
     document.getElementById("inputAlumName").value = "";
     document.getElementById("inputAlumNetID").value = "";
     document.getElementById("checkAlum").value = "";
