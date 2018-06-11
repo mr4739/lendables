@@ -59,6 +59,7 @@ function handleFormSubmit(event) {
                     clearBody();
                     var result = JSON.parse(tmp);
                     var data = JSON.parse(result.data);
+                    console.log(data);
                     for (var i = 0; i < data.length; i++) {
                         var rowData = data[i];
                         var row = document.createElement("div");
@@ -97,9 +98,10 @@ function handleFormSubmit(event) {
 }
 
 function currentItems() {
+    document.getElementById("form-container").style.display = "block";
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
-    xhr.open('GET', url);
+    xhr.open('GET', url + "?intent=currItems");
     xhr.onreadystatechange = function () {
         var tmp = xhr.responseText;
         if (tmp) {
@@ -127,9 +129,10 @@ function currentItems() {
 }
 
 function getLog() {
+    document.getElementById("form-container").style.display = "block";
     var xhr = new XMLHttpRequest();
-    var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
-    xhr.open('GET', url);
+    var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";    
+    xhr.open('GET', url + "?intent=getLog");
     xhr.onreadystatechange = function () {
         var tmp = xhr.responseText;
         if (tmp) {
@@ -137,6 +140,35 @@ function getLog() {
             var result = JSON.parse(tmp);
             var data = JSON.parse(result.data);
             for (var i = 0; i < data.length && i < 8; i++) {
+                var rowData = data[data.length - i - 1];
+                var row = document.createElement("div");
+                for (var j = 0; j < data[i].length; j++) {
+                    var temp = document.createElement("div");
+                    temp.innerHTML = rowData[j];
+                    temp.className += "rowCell"
+                    row.appendChild(temp);
+                }
+                row.className += "row";
+                document.getElementById("infos").appendChild(row);
+            }
+        }
+        return;
+    }
+    xhr.send();
+}
+
+function getStats() {
+    document.getElementById("form-container").style.display = "none";
+    var xhr = new XMLHttpRequest();
+    var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";    
+    xhr.open('GET', url + "?intent=getStats");
+    xhr.onreadystatechange = function () {
+        var tmp = xhr.responseText;
+        if (tmp) {
+            clearBody();
+            var result = JSON.parse(tmp);
+            var data = JSON.parse(result.data);
+            for (var i = 0; i < data.length; i++) {
                 var rowData = data[data.length - i - 1];
                 var row = document.createElement("div");
                 for (var j = 0; j < data[i].length; j++) {
@@ -171,31 +203,58 @@ function getArchive() {
 
 function handleAlumForm(e) {
     event.preventDefault();
+    var formElements = document.getElementById("aForm").elements;
+    if (formElements["Name"].value != "" && formElements["NetID"].value != "") {
+        intentString = "genAlumCode";
+    } else if (formElements["abarcode"].value != "") {
+        intentString = "checkInAlum";
+    } else if (formElements["bbarcode"].value != "") {
+        intentString = "getAlumInfo";
+    }
+    var intentString;
     var data = getFormData("aForm");
     var url = event.target.action;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
-        var tmp = xhr.responseText;
-        if (tmp) {
-            tmp = JSON.parse(tmp);
-            clearBody();
-            document.getElementById("infos").textContent = tmp.data;
-            clearAlumForm();
-            return;
-        }
+            var tmp = xhr.responseText;
+            if (tmp) {
+                clearBody();
+                tmp = JSON.parse(tmp);
+                var data = JSON.parse(tmp.data);
+                if (intentString == "checkInAlum" || intentString == "getAlumInfo") {
+                    for (var i = 0; i < data.length; i++){
+                        var rowData = data[i];
+                        var row = document.createElement("div");
+                        for (var j = 1; j < data[i].length; j++) {
+                            var temp = document.createElement("div");
+                            if (j == 3) {
+                                var d = new Date(Date.parse(rowData[j]));
+                                rowData[j] = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+                            }
+                            temp.innerHTML = rowData[j];
+                            temp.className += "rowCell";
+                            row.appendChild(temp);
+                        }
+                        row.className += "row";
+                        document.getElementById("infos").appendChild(row);
+                    }
+                } else {
+                    document.getElementById("infos").textContent = data;
+                }
+                clearAlumForm();
+                return;
+            }
     };
     var encoded = Object.keys(data).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
     }).join('&')
-
     var aName = document.getElementById("inputAlumName").value;
     var aNetID = document.getElementById("inputAlumNetID").value;
+    var aExpire = document.getElementById("inputExpire").value;
     var aBarcode = document.getElementById("checkAlum").value;
     var bBarcode = document.getElementById("infoAlum").value;
-
-
     if (aName != "" && aNetID != "") {
         xhr.send(encoded + "&intent=" + "genAlumCode");
     }
@@ -210,6 +269,7 @@ function handleAlumForm(e) {
 function clearAlumForm() {
     document.getElementById("inputAlumName").value = "";
     document.getElementById("inputAlumNetID").value = "";
+    document.getElementById("inputExpire").value = "";
     document.getElementById("checkAlum").value = "";
     document.getElementById("infoAlum").value = "";
 }
@@ -218,5 +278,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('cForm').addEventListener("submit", handleFormSubmit, false);
     document.getElementById('viewLog').addEventListener("click", getLog);
     document.getElementById('archive').addEventListener("click", getArchive);
+    document.getElementById('stats').addEventListener("click", getStats);
     document.getElementById('aForm').addEventListener("submit", handleAlumForm, false);
 }, false);
