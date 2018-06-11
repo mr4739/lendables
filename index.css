@@ -35,7 +35,8 @@ button {
     text-align: center;
 }
 
-#form-container {
+#aform-container {
+    display: none;
     width: 16em;
     margin: 2em auto;
     background-color: #ECEFF1;
@@ -43,7 +44,16 @@ button {
     border-radius: 0.5em;
 }
 
-#form-container:hover {
+#cform-container {
+    display: block;
+    width: 16em;
+    margin: 2em auto;
+    background-color: #ECEFF1;
+    padding: 2em;
+    border-radius: 0.5em;
+}
+
+#aform-container:hover, #cform-container:hover {
     background-color: #CFD8DC;
 }
 

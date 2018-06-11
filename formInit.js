@@ -98,7 +98,8 @@ function handleFormSubmit(event) {
 }
 
 function currentItems() {
-    document.getElementById("form-container").style.display = "block";
+    document.getElementById("cform-container").style.display = "block";
+    document.getElementById("aform-container").style.display = "none";
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";
     xhr.open('GET', url + "?intent=currItems");
@@ -129,7 +130,8 @@ function currentItems() {
 }
 
 function getLog() {
-    document.getElementById("form-container").style.display = "block";
+    document.getElementById("cform-container").style.display = "block";
+    document.getElementById("aform-container").style.display = "none";
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";    
     xhr.open('GET', url + "?intent=getLog");
@@ -158,7 +160,8 @@ function getLog() {
 }
 
 function getStats() {
-    document.getElementById("form-container").style.display = "none";
+    document.getElementById("cform-container").style.display = "none";
+    document.getElementById("aform-container").style.display = "none";
     var xhr = new XMLHttpRequest();
     var url = "https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec";    
     xhr.open('GET', url + "?intent=getStats");

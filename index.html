@@ -65,13 +65,15 @@
         <div id="notifBody">Notification placeholder</div>
     </div>
     <img src="lenda.png" style="margin-top: 4em;">
-    <div id="form-container">
+    <div id="cform-container">
         <h3>Lendables</h3>
         <form id="cForm" method="POST" action="https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec">
             <input type="text" name="netID" placeholder="NetID" id="inputNetID">
             <input type="text" name="Item" placeholder="Barcode Scan" id="inputItem">
             <button type="submit">Submit</button>
         </form>
+    </div>
+    <div id="aform-container">
         <h3>Alumni</h3>
         <form id="aForm" method="POST" action="https://script.google.com/a/nyu.edu/macros/s/AKfycbws7Z3d7J8cyjZq2SWkQT6ip4aZMMzGRsTsllxvslvakFaiNMdx/exec">
             <p>Generate a barcode for alumni</p>
@@ -99,6 +101,9 @@
         </button>
         <button class="opt" id="searchId">
             Search netID
+        </button>
+        <button class="opt" id="alumni">
+            Alumni
         </button>
         <button class="opt" id="currItem">
             View All Lendables in Use

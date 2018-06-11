@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('scan').addEventListener('click', scan);
     document.getElementById('searchId').addEventListener('click', search);
     document.getElementById('returnItem').addEventListener('click', returnItem);
+    document.getElementById('alumni').addEventListener('click', showAlumForm);
     document.getElementById('currItem').addEventListener('click', currentItems);
     document.getElementById('aboutInfo').addEventListener('click', showAbout);
 });
@@ -45,21 +46,29 @@ function hideNotif() {
     document.getElementById("notif").style.display = "none";
 }
 
+function showAlumForm() {
+    document.getElementById("cform-container").style.display = "none";
+    document.getElementById("aform-container").style.display = "block";
+}
+
 function scan() {
-    document.getElementById("form-container").style.display = "block";
+    document.getElementById("cform-container").style.display = "block";
+    document.getElementById("aform-container").style.display = "none";
     elNetID.style.display = "block";
     elItem.style.display = "block";
 }
 
 function returnItem() {
-    document.getElementById("form-container").style.display = "block";
+    document.getElementById("cform-container").style.display = "block";
+    document.getElementById("aform-container").style.display = "none";
     elNetID.style.display = "none";
     elNetID.value = "";
     elItem.style.display = "block";
 }
 
 function search() {
-    document.getElementById("form-container").style.display = "block";
+    document.getElementById("cform-container").style.display = "block";
+    document.getElementById("aform-container").style.display = "none";
     elItem.style.display = "none";
     elItem.value = "";
     elNetID.style.display = "block";
@@ -73,7 +82,8 @@ function clearBody() {
 }
 
 function showAbout() {
-    document.getElementById("form-container").style.display = "none";
+    document.getElementById("cform-container").style.display = "none";
+    document.getElementById("aform-container").style.display = "none";
     var aboutEl = document.createElement("div");
     aboutEl.innerHTML = 'NYU LaGuardia Co-op<br>version 1.0.1<br>https://github.com/stcnyu/';
     aboutEl.style.textAlign = "left";
