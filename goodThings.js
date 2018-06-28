@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('alumni').addEventListener('click', showAlumForm);
     document.getElementById('currItem').addEventListener('click', currentItems);
     document.getElementById('aboutInfo').addEventListener('click', showAbout);
+    document.getElementById('calculator').addEventListener('click', showPoster);
+    document.getElementById('calcButton').addEventListener('click', calcPoster);
 });
 
 function showMenu() {
@@ -49,11 +51,13 @@ function hideNotif() {
 function showAlumForm() {
     document.getElementById("cform-container").style.display = "none";
     document.getElementById("aform-container").style.display = "block";
+    document.getElementById("pform-container").style.display = "none";
 }
 
 function scan() {
     document.getElementById("cform-container").style.display = "block";
     document.getElementById("aform-container").style.display = "none";
+    document.getElementById("pform-container").style.display = "none";
     elNetID.style.display = "block";
     elItem.style.display = "block";
 }
@@ -61,6 +65,7 @@ function scan() {
 function returnItem() {
     document.getElementById("cform-container").style.display = "block";
     document.getElementById("aform-container").style.display = "none";
+    document.getElementById("pform-container").style.display = "none";
     elNetID.style.display = "none";
     elNetID.value = "";
     elItem.style.display = "block";
@@ -69,6 +74,7 @@ function returnItem() {
 function search() {
     document.getElementById("cform-container").style.display = "block";
     document.getElementById("aform-container").style.display = "none";
+    document.getElementById("pform-container").style.display = "none";
     elItem.style.display = "none";
     elItem.value = "";
     elNetID.style.display = "block";
@@ -84,6 +90,7 @@ function clearBody() {
 function showAbout() {
     document.getElementById("cform-container").style.display = "none";
     document.getElementById("aform-container").style.display = "none";
+    document.getElementById("pform-container").style.display = "none";
     var aboutEl = document.createElement("div");
     aboutEl.innerHTML = 'NYU LaGuardia Co-op<br>version 1.0.1<br>https://github.com/stcnyu/';
     aboutEl.style.textAlign = "left";
@@ -103,4 +110,22 @@ function formatAMPM(date) {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
+}
+
+function showPoster (){
+    document.getElementById("cform-container").style.display = "none";
+    document.getElementById("aform-container").style.display = "none";
+    document.getElementById("pform-container").style.display = "block";
+}
+
+function calcPoster () {
+    clearBody();
+    var length = document.getElementById("posterLength").value;
+    var lengthPrice = 0.33;
+    var price = length * lengthPrice ; 
+    price = parseFloat(Math.round(price * 100) / 100).toFixed(2);
+    var priceEl = document.createElement("div");
+    priceEl.innerHTML = "$ " + price ;
+    document.getElementById("infos").appendChild(priceEl);
+    document.getElementById("posterLength").value = "";
 }

@@ -53,7 +53,16 @@ button {
     border-radius: 0.5em;
 }
 
-#aform-container:hover, #cform-container:hover {
+#pform-container {
+    display: none;
+    width: 16em;
+    margin: 2em auto;
+    background-color: #ECEFF1;
+    padding: 2em;
+    border-radius: 0.5em;
+}
+
+#aform-container:hover, #cform-container:hover, #pform-container:hover {
     background-color: #CFD8DC;
 }
 
