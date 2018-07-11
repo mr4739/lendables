@@ -1,3 +1,3 @@
 # stcnyu
 
-Lendable QR scanning project
+Lendable barcode scanning project
