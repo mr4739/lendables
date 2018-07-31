@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.getElementById('calcButton').addEventListener('click', calcPoster);
 });
 
+document.addEventListener('keydown', function(e) {
+  if (e.keyCode == 70) {
+    document.getElementById('audio').play();
+  }
+});
+
 function showMenu() {
     document.getElementById("options").className = "menu-on";
 }
